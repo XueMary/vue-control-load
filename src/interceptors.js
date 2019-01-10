@@ -2,16 +2,35 @@
 import axios from 'axios'
 import cacheFn from './cache'
 
-function interceptors(Vue) {
+function interceptors(Vue, options={post:false}) {
+
   let count = 0
+
+  let openPost = options.post ? true : false
+
+  function filterDataPost (config) {
+    if(openPost){
+      delete config.data.post
+    }
+    return config
+  }
+
   // Add a request interceptor
   axios.interceptors.request.use(config => {
-    cacheFn(config, () => {
+
+    if(openPost && config.data.post){
+      delete config.data.post
+    }
+    else {
+      openPost = false
+    }
+    
+    cacheFn(config, openPost, () => {
       ++count
       Vue.prototype.myLoading = true
     })
 
-    return config;
+    return filterDataPost(config);
   }, function (error) {
     // Do something with request error
     return Promise.reject(error);
@@ -21,7 +40,7 @@ function interceptors(Vue) {
   axios.interceptors.response.use(response => {
     const config = response.config
 
-    cacheFn(config, (cache,key) => {
+    cacheFn(config, openPost, (cache,key) => {
       --count
       if (count === 0) {
         Vue.prototype.myLoading = false
