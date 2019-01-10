@@ -14,3 +14,14 @@ import 'controlLoad' from 'vue-control-load'
 
 Vue.use(controlLoad)
 ```
+
+
+如果有post请求数据请按如下方法使用
+
+```
+Vue.use(controlLoad,{post: true})
+
+axios.post('xxxx',{
+  cache: true
+})
+```

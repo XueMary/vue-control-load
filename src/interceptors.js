@@ -8,18 +8,11 @@ function interceptors(Vue, options={post:false}) {
 
   let openPost = options.post ? true : false
 
-  function filterDataPost (config) {
-    if(openPost){
-      delete config.data.post
-    }
-    return config
-  }
-
   // Add a request interceptor
   axios.interceptors.request.use(config => {
 
-    if(openPost && config.data.post){
-      delete config.data.post
+    if(openPost && config.data.cache){
+      delete config.data.cache
     }
     else {
       openPost = false
@@ -30,7 +23,7 @@ function interceptors(Vue, options={post:false}) {
       Vue.prototype.myLoading = true
     })
 
-    return filterDataPost(config);
+    return config;
   }, function (error) {
     // Do something with request error
     return Promise.reject(error);
