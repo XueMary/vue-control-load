@@ -1,6 +1,6 @@
 
-import axios from 'axios'
-import cacheFn from './cache'
+const axios = require('axios')
+const cacheFn = require('./cache')
 
 function interceptors(Vue, options={post:false}) {
 
@@ -48,4 +48,4 @@ function interceptors(Vue, options={post:false}) {
   });
 }
 
-export default interceptors
+module.exports = interceptors

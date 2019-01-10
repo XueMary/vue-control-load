@@ -1,0 +1,23 @@
+{
+  "name": "vue-control-load",
+  "version": "1.0.3",
+  "description": "control loading change",
+  "main": "/src/index.js",
+  "dependencies": {
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XueMary/vue-control-load.git"
+  },
+  "author": "xuejihong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XueMary/vue-control-load/issues"
+  },
+  "homepage": "https://github.com/XueMary/vue-control-load#readme"
+}

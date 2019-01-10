@@ -1,5 +1,5 @@
 let MyLoading = {}
-import interceptors from './interceptors'
+const interceptors = require('./interceptors')
 
 MyLoading.install = function (Vue, options) {
   Vue.prototype.myLoading = false
@@ -7,4 +7,4 @@ MyLoading.install = function (Vue, options) {
   interceptors(Vue, options)
 }
 
-export default MyLoading
+module.exports = MyLoading

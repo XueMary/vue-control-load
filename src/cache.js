@@ -4,7 +4,8 @@ function cacheFn(config, openPost, callback) {
   
   const { method, url } = config;
   const key = url.split('?')[0]
-  method = method.toUpperCase()
+  let type = method
+  type = type.toUpperCase()
 
   if(cache[key]){
     return
@@ -13,9 +14,9 @@ function cacheFn(config, openPost, callback) {
   if(openPost){
     callback(cache, key)
   }
-  else if (method === 'GET') {
+  else if (type === 'GET') {
     callback(cache, key)
   }
 }
 
-export default cacheFn
+module.exports = cacheFn
