@@ -6,7 +6,7 @@ get请求时自动将loading属性设置为true
 
 在有缓存的情况下loading会为false不会变更
 
-暴露在全局的属性是 this.$myLoading 不可被手动更改
+暴露在全局的属性是 this.$gLoading 不可被手动更改
 
 ### 使用方式
 
@@ -18,7 +18,7 @@ import 'controlLoad' from 'vue-control-load'
 Vue.use(controlLoad)
 
 new Vue({
-  myLoading: false,
+  gLoading: false,
 }).$mount('#app')
 ```
 
@@ -41,7 +41,7 @@ import MyLoading from 'vue-control-load'
 Vue.use(MyLoading)
 
 new Vue({
-  myLoading: false,
+  gLoading: false,
 }).$mount('#app')
 
 ```
@@ -50,7 +50,7 @@ app.vue
 ```
 <template>
   <div id="app" @click="gets">
-    {{$myLoading}}
+    {{$gLoading}}
   </div>
 </template>
 

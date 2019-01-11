@@ -3,13 +3,13 @@
 function _loadInit() {
 
   const options = this.$options
-  if (options.myLoading !== undefined) {
+  if (options.gLoading !== undefined) {
     
-    this.$myLoading = options.myLoading
+    this.$gLoading = options.gLoading
 
-  } else if (options.parent && (options.parent.$myLoading !== undefined)) {
+  } else if (options.parent && (options.parent.$gLoading !== undefined)) {
 
-    this.$myLoading = options.parent.$myLoading
+    this.$gLoading = options.parent.$gLoading
   }
 }
 
