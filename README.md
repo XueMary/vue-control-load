@@ -69,7 +69,7 @@ export default {
 </script>
 ```
 
-![loading]('./src/img/loading.gif')
+![loading](./src/img/loading.gif')
 
 
 
