@@ -24,8 +24,14 @@ function _interceptors(options={post:false}) {
     })
 
     return config;
-  }, function (error) {
+  }, error => {
     // Do something with request error
+    cacheFn(null, openPost, () => {
+      --count
+      if (count === 0) {
+        this._updata(false)
+      }
+    })
     return Promise.reject(error);
   });
 
@@ -44,8 +50,14 @@ function _interceptors(options={post:false}) {
     })
 
     return response;
-  }, function (error) {
+  }, error => {
     // Do something with response error
+    cacheFn(null, openPost, () => {
+      --count
+      if (count === 0) {
+        this._updata(false)
+      }
+    })
     return Promise.reject(error);
   });
 }

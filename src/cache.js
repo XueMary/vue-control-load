@@ -1,6 +1,11 @@
 let cache = {}
 
 function cacheFn(config, openPost, callback) {
+
+  if(!config){
+    callback()
+    return
+  }
   
   let { method, url } = config;
   const key = url.split('?')[0]
