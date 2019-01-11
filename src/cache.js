@@ -1,7 +1,7 @@
 let cache = {}
 
-function cacheFn(config, openPost, callback) {
-
+function cacheFn(config, callback) {
+  
   if(!config){
     callback()
     return
@@ -9,17 +9,20 @@ function cacheFn(config, openPost, callback) {
   
   let { method, url } = config;
   const key = url.split('?')[0]
+  console.log(key)
   method = method.toUpperCase()
+
+  const conf = {
+    cache,
+    key
+  }
 
   if(cache[key]){
     return
   }
 
-  if(openPost){
-    callback(cache, key)
-  }
-  else if (method === 'GET') {
-    callback(cache, key)
+  if(method === 'GET' || config.openPost){
+    callback(conf)
   }
 }
 

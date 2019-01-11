@@ -1,7 +1,7 @@
 
 
 function _loadInit() {
-
+  //挂在全局loading属性到当前页面所有组件
   const options = this.$options
   if (options.gLoading !== undefined) {
     

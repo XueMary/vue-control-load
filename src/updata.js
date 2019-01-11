@@ -1,17 +1,26 @@
-let vms = []
+let gisBool
 
 function _updata(isBool) {
   let vm = this
-  vm.$gLoading = isBool
-  vm.$forceUpdate()
-  vms.push(vm)
+  gisBool = isBool
   
-  if(vm.$parent === undefined && isBool === false && vms.length){
-    for(let _this of vms){
-      _this.$gLoading = isBool
-      _this.$forceUpdate()
+  vm.$gLoading = gisBool
+  vm.$forceUpdate()
+
+  if(vm.$children){
+    mapChild(vm.$children)
+  }
+}
+
+
+function mapChild(childs){
+  for(let index in childs){
+    let child = childs[index]
+    child.$gLoading = gisBool
+    child.$forceUpdate()
+    if(child.$children){
+      mapChild(child.$children)
     }
-    vms.length = 0
   }
 }
 

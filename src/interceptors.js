@@ -2,15 +2,25 @@
 const axios = require('axios') 
 const cacheFn = require('./cache') 
 
-function _interceptors(options={post:false}) {
+let insatll = false
 
+function _interceptors(options={post:false}) {
+  if(insatll){
+    return
+  }
+  if(this !== this.$root){
+    insatll = true
+    return
+  }
+  
   let count = 0
 
   let openPost = options.post ? true : false
 
   // Add a request interceptor
   axios.interceptors.request.use(config => {
-
+    // console.log(config.url.split)
+    // post请求是否更新loading状态判断
     if(openPost && config.data.cache){
       delete config.data.cache
     }
@@ -18,15 +28,16 @@ function _interceptors(options={post:false}) {
       openPost = false
     }
     
-    cacheFn(config, openPost, () => {
+    //全局loading属性更新
+    cacheFn({openPost,...config}, () => {
       ++count
       this._updata(true)
     })
 
     return config;
   }, error => {
-    // Do something with request error
-    cacheFn(null, openPost, () => {
+    
+    cacheFn(null, () => {
       --count
       if (count === 0) {
         this._updata(false)
@@ -39,7 +50,9 @@ function _interceptors(options={post:false}) {
   axios.interceptors.response.use(response => {
     const config = response.config
 
-    cacheFn(config, openPost, (cache,key) => {
+    //全局loading属性更新
+    cacheFn({openPost, ...config}, (conf) => {
+      let {cache,key} = conf
       --count
       if (count === 0) {
         this._updata(false)
@@ -52,7 +65,7 @@ function _interceptors(options={post:false}) {
     return response;
   }, error => {
     // Do something with response error
-    cacheFn(null, openPost, () => {
+    cacheFn(null, () => {
       --count
       if (count === 0) {
         this._updata(false)
