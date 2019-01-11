@@ -10,6 +10,10 @@ get请求时自动将loading属性设置为true
 
 暴露在全局的属性是 this.$gLoading 不可被手动更改
 
+/v2/movie/search?q=张艺谋
+
+局部绑定 v-partLoad="lo_search"  ( lo_  +  request name )
+
 ### 使用方式
 
 ```
@@ -39,8 +43,8 @@ axios.post('xxxx',{
 
 main.js
 ```
-import MyLoading from 'vue-control-load'
-Vue.use(MyLoading)
+import gLoading from 'vue-control-load'
+Vue.use(gLoading)
 
 new Vue({
   gLoading: false,
@@ -80,3 +84,5 @@ export default {
 1.0.35 第一版
 
 1.0.36 请求失败后未修改状态
+
+1.1.1 添加局部绑定，优化监听方式

@@ -1,9 +1,9 @@
-let MyLoading = {}
+let gLoading = {}
 const _interceptors = require('./interceptors') 
 const _loadInit = require('./loadInit') 
 const _updata = require('./updata') 
 
-MyLoading.install = function (Vue, options) {
+gLoading.install = function (Vue, options) {
 
   let loads = {}
 
@@ -30,4 +30,4 @@ MyLoading.install = function (Vue, options) {
     },
   })
 }
-module.exports = MyLoading
+module.exports = gLoading
