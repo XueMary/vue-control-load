@@ -69,6 +69,8 @@ export default {
 </script>
 ```
 
+![loading]('./src/img/loading.gif')
+
 
 
 ### 版本
