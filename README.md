@@ -32,6 +32,45 @@ axios.post('xxxx',{
   cache: true
 })
 ```
+
+###示例
+
+main.js
+```
+import MyLoading from 'vue-control-load'
+Vue.use(MyLoading)
+
+new Vue({
+  myLoading: false,
+}).$mount('#app')
+
+```
+
+app.vue
+```
+<template>
+  <div id="app" @click="gets">
+    {{$myLoading}}
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+export default {
+  methods:{
+    gets(){
+      axios.get('/v2/movie/search?q=张艺谋')
+    }
+  },
+  created(){
+    this.gets()
+  }
+}
+</script>
+```
+
+
+
 ### 版本
 
-1.0.34 第一版
+1.0.35 第一版

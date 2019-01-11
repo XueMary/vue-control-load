@@ -1,6 +1,6 @@
 
 const axios = require('axios') 
-const cacheFn = require('cache') 
+const cacheFn = require('./cache') 
 
 function _interceptors(options={post:false}) {
 
