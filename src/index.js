@@ -5,15 +5,16 @@ const _updata = require('./updata')
 
 MyLoading.install = function (Vue, options) {
 
-  let loads = []
+  let loads = {}
 
   Vue.directive('partLoad', {
-    bind (el, binding) {
-      loads.push(binding.expression)
+    bind (el, binding, vnode) {
+      loads[binding.expression] = vnode.context
     },
     unbind(el, binding){
-      let index = loads.indexOf(binding.expression)
-      loads.splice(index,1)
+      if(loads[binding.expression]){
+        delete loads[binding.expression]
+      }
     }
   })
 

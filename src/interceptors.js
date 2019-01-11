@@ -4,45 +4,43 @@ const cacheFn = require('./cache')
 
 let insatll = false
 
-function _interceptors(options={post:false}) {
-  if(insatll){
+function _interceptors(options = { post: false }) {
+  if (insatll) {
     return
   }
-  if(this !== this.$root){
+  if (this !== this.$root) {
     insatll = true
     return
   }
-  
+
   let count = 0
 
   let openPost = options.post ? true : false
 
+  let loads = options.loads
+
   // Add a request interceptor
   axios.interceptors.request.use(config => {
-    // console.log(config.url.split)
     // post请求是否更新loading状态判断
-    if(openPost && config.data.cache){
+    if (openPost && config.data.cache) {
       delete config.data.cache
     }
     else {
       openPost = false
     }
-    
+
     //全局loading属性更新
-    cacheFn({openPost,...config}, () => {
+    cacheFn({ openPost, ...config }, (conf) => {
       ++count
+      const name = 'lo_' + conf.name
+      if (loads[name]) {
+        loads[name][name] = true
+      }
       this._updata(true)
     })
 
     return config;
   }, error => {
-    
-    cacheFn(null, () => {
-      --count
-      if (count === 0) {
-        this._updata(false)
-      }
-    })
     return Promise.reject(error);
   });
 
@@ -51,22 +49,36 @@ function _interceptors(options={post:false}) {
     const config = response.config
 
     //全局loading属性更新
-    cacheFn({openPost, ...config}, (conf) => {
-      let {cache,key} = conf
+    cacheFn({ openPost, ...config }, (conf) => {
+      
       --count
+      let { cache, key, name } = conf
+      name = 'lo_' + name
+      if (loads[name]) {
+        loads[name][name] = false
+      }
+      
       if (count === 0) {
         this._updata(false)
       }
-      if(response.data.total){
+      if (response.data.total) {
         cache[key] = true
       }
     })
 
     return response;
   }, error => {
-    // Do something with response error
+
     cacheFn(null, () => {
       --count
+
+      for (let name in loads) {
+        const context = loads[name]
+        if (context[name]) {
+          context[name] = false
+        }
+      }
+
       if (count === 0) {
         this._updata(false)
       }

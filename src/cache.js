@@ -9,12 +9,15 @@ function cacheFn(config, callback) {
   
   let { method, url } = config;
   const key = url.split('?')[0]
-  console.log(key)
+  let fragment = key.split('/')
+  const name = fragment[fragment.length-1]
+  
   method = method.toUpperCase()
 
   const conf = {
     cache,
-    key
+    key,
+    name
   }
 
   if(cache[key]){

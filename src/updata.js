@@ -14,8 +14,7 @@ function _updata(isBool) {
 
 
 function mapChild(childs){
-  for(let index in childs){
-    let child = childs[index]
+  for(let child of childs){
     child.$gLoading = gisBool
     child.$forceUpdate()
     if(child.$children){
