@@ -2,10 +2,9 @@ let cache = {}
 
 function cacheFn(config, openPost, callback) {
   
-  const { method, url } = config;
+  let { method, url } = config;
   const key = url.split('?')[0]
-  let type = method
-  type = type.toUpperCase()
+  method = method.toUpperCase()
 
   if(cache[key]){
     return
@@ -14,7 +13,7 @@ function cacheFn(config, openPost, callback) {
   if(openPost){
     callback(cache, key)
   }
-  else if (type === 'GET') {
+  else if (method === 'GET') {
     callback(cache, key)
   }
 }

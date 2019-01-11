@@ -1,8 +1,8 @@
 
-const axios = require('axios')
-const cacheFn = require('./cache')
+const axios = require('axios') 
+const cacheFn = require('cache') 
 
-function interceptors(Vue, options={post:false}) {
+function _interceptors(options={post:false}) {
 
   let count = 0
 
@@ -20,7 +20,7 @@ function interceptors(Vue, options={post:false}) {
     
     cacheFn(config, openPost, () => {
       ++count
-      Vue.prototype.myLoading = true
+      this._updata(true)
     })
 
     return config;
@@ -36,9 +36,11 @@ function interceptors(Vue, options={post:false}) {
     cacheFn(config, openPost, (cache,key) => {
       --count
       if (count === 0) {
-        Vue.prototype.myLoading = false
+        this._updata(false)
       }
-      cache[key] = true
+      if(response.data.total){
+        cache[key] = true
+      }
     })
 
     return response;
@@ -48,4 +50,4 @@ function interceptors(Vue, options={post:false}) {
   });
 }
 
-module.exports = interceptors
+module.exports = _interceptors

@@ -1,10 +1,19 @@
 let MyLoading = {}
-const interceptors = require('./interceptors')
+const _interceptors = require('./interceptors') 
+const _loadInit = require('./loadInit') 
+const _updata = require('./updata') 
 
 MyLoading.install = function (Vue, options) {
-  Vue.prototype.myLoading = false
-  // 监听全局请求，get请求更新全局 myLoading 属性
-  interceptors(Vue, options)
+  Vue.mixin({
+    methods: {
+      _loadInit,
+      _interceptors,
+      _updata
+    },
+    created() {
+      this._loadInit()
+      this._interceptors(options)
+    },
+  })
 }
-
 module.exports = MyLoading
