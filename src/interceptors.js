@@ -1,6 +1,7 @@
 
 const axios = require('axios') 
 const cacheFn = require('./cache') 
+const getRequestName  = require('./getRequestName')
 
 let insatll = false
 
