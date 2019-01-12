@@ -1,5 +1,5 @@
 let cache = {}
-import getRequestName from './getRequestName'
+const getRequestName = require('./getRequestName')
 
 function cacheFn(config, callback) {
   
