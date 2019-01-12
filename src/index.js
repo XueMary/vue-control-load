@@ -1,9 +1,9 @@
-let MyLoading = {}
+
 const _interceptors = require('./interceptors') 
 const _loadInit = require('./loadInit') 
 const _updata = require('./updata') 
 
-MyLoading.install = function (Vue, options) {
+ControlLoad.install = function (Vue, options) {
 
   let loads = {}
 
@@ -46,7 +46,7 @@ class state {
     })
   }
 }
-module.exports = MyLoading
-module = {
-  state
+module.exports = {
+  state,
+  ControlLoad,
 }

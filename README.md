@@ -19,9 +19,9 @@ get请求时自动将loading属性设置为true
 ```
 npm i vue-control-load
 
-import controlLoad,{state} from 'vue-control-load'
+import {ControlLoad,state} from 'vue-control-load'
 
-Vue.use(controlLoad)
+Vue.use(ControlLoad)
 let gLoading = new state(Vue)
 
 new Vue({
@@ -33,7 +33,7 @@ new Vue({
 如果有post请求数据请按如下方法使用
 
 ```
-Vue.use(controlLoad,{post: true})
+Vue.use(ControlLoad,{post: true})
 
 axios.post('xxxx',{
   cache: true
@@ -44,8 +44,8 @@ axios.post('xxxx',{
 
 main.js
 ```
-import controlLoad,{state} from 'vue-control-load'
-Vue.use(controlLoad)
+import {ControlLoad, state} from 'vue-control-load'
+Vue.use(ControlLoad)
 let gLoading = new state(Vue)
 
 new Vue({
