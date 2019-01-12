@@ -1,4 +1,4 @@
-
+let ControlLoad = {}
 const _interceptors = require('./interceptors') 
 const _loadInit = require('./loadInit') 
 const _updata = require('./updata') 
