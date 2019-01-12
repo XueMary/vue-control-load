@@ -15,6 +15,7 @@ get请求时自动将loading属性设置为true
 /v2/movie/search?q=张艺谋
 
 局部绑定 v-partLoad="lo_search"  ( lo_  +  request name )
+按钮绑定 v-partLoad="search_btn"
 
 ```
 npm i vue-control-load
@@ -90,3 +91,5 @@ export default {
 1.1.1 添加局部绑定，优化监听方式
 
 1.1.2 优化数据更新方式
+
+1.1.7 添加按钮绑定

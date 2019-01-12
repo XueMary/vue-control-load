@@ -1,4 +1,5 @@
 let cache = {}
+import getRequestName from './getRequestName'
 
 function cacheFn(config, callback) {
   
@@ -8,9 +9,7 @@ function cacheFn(config, callback) {
   }
   
   let { method, url } = config;
-  const key = url.split('?')[0]
-  let fragment = key.split('/')
-  const name = fragment[fragment.length-1]
+  let {key, name} = getRequestName(url)
   
   method = method.toUpperCase()
 

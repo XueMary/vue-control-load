@@ -8,7 +8,6 @@ function _interceptors(options = { post: false }) {
   if (insatll) {
     return
   }
-  
   insatll = true
 
   let count = 0
@@ -26,6 +25,8 @@ function _interceptors(options = { post: false }) {
     else {
       openPost = false
     }
+
+    upBtn(config.url, true)
 
     //全局loading属性更新
     cacheFn({ openPost, ...config }, (conf) => {
@@ -46,21 +47,24 @@ function _interceptors(options = { post: false }) {
   axios.interceptors.response.use(response => {
     const config = response.config
 
+    upBtn(config.url, false)
+
     //全局loading属性更新
     cacheFn({ openPost, ...config }, (conf) => {
       
       --count
       let { cache, key, name } = conf
       name = 'lo_' + name
+      
       if (loads[name]) {
         loads[name][name] = false
       }
+      
       if (count === 0) {
         this._updata(false)
       }
-      if (response.data.total) {
-        cache[key] = true
-      }
+
+      cache[key] = true
     })
 
     return response;
@@ -82,6 +86,15 @@ function _interceptors(options = { post: false }) {
     })
     return Promise.reject(error);
   });
+
+  function upBtn(url, isBool){
+    let {name} = getRequestName(url)
+    
+    let btn = name + '_btn'
+    if(loads[btn]){
+      loads[btn][btn] = isBool
+    }
+  }
 }
 
 module.exports = _interceptors
