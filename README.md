@@ -2,11 +2,11 @@
 loading的显示隐藏是一个麻烦事，为了省事很多时候选择了全局loading，请求就显示
 现在你只管绑定局部loading其他的交给我，在有数据的情况下并不会显示loading
 
-配合vuex这类内存缓存使用,当然常用本地缓存也可以
-
-get请求时自动将loading属性设置为true
+请求时自动将loading属性设置为true
 
 在有缓存的情况下loading会为false不会变更
+
+配合vuex这类内存缓存使用,当然常用本地缓存也可以
 
 
 ### 使用方式
@@ -15,6 +15,7 @@ get请求时自动将loading属性设置为true
 /v2/movie/search?q=张艺谋
 
 局部绑定 v-partLoad="lo_search"  ( lo_  +  request name )
+
 按钮绑定 v-partLoad="search_btn"
 
 ```
@@ -31,7 +32,7 @@ new Vue({
 ```
 
 
-如果有post请求数据请按如下方法使用
+如果获取数据采用 POST 请按如下方法使用
 
 ```
 Vue.use(ControlLoad,{post: true})
