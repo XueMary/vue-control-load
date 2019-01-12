@@ -3,40 +3,33 @@ const axios = require('axios')
 const cacheFn = require('./cache') 
 const getRequestName  = require('./getRequestName')
 
-let insatll = false
 
-function _interceptors(options = { post: false }) {
-  if (insatll) {
-    return
-  }
-  insatll = true
-
-  let count = 0
-
-  let openPost = options.post ? true : false
+function _interceptors(options={}) {
 
   let loads = options.loads
 
   // Add a request interceptor
   axios.interceptors.request.use(config => {
-    // post请求是否更新loading状态判断
-    if (openPost && config.data.cache) {
-      delete config.data.cache
+    // 判断是否有cache，有cache下次请求不显示loading
+    if(config.params && config.params.cache){
+      config.cache = config.params.cache
+      delete config.params.cache
     }
-    else {
-      openPost = false
+    else if (config.data && config.data.cache) {
+      config.cache = config.data.cache
+      delete config.data.cache
     }
 
     upBtn(config.url, true)
 
     //全局loading属性更新
-    cacheFn({ openPost, ...config }, (conf) => {
-      ++count
-      const name = 'lo_' + conf.name
+    cacheFn(config, (conf) => {
+      let { name } = conf
+      name = 'lo_' + name
+
       if (loads[name]) {
         loads[name][name] = true
       }
-      this._updata(true)
     })
 
     return config;
@@ -51,28 +44,24 @@ function _interceptors(options = { post: false }) {
     upBtn(config.url, false)
 
     //全局loading属性更新
-    cacheFn({ openPost, ...config }, (conf) => {
-      
-      --count
-      let { cache, key, name } = conf
+    cacheFn(config, (conf) => {
+      let { name, cache, key } = conf
       name = 'lo_' + name
       
       if (loads[name]) {
         loads[name][name] = false
       }
-      
-      if (count === 0) {
-        this._updata(false)
+
+      if(config.cache){
+        cache[key] = true
       }
 
-      cache[key] = true
     })
 
     return response;
   }, error => {
 
     cacheFn(null, () => {
-      --count
 
       for (let name in loads) {
         const context = loads[name]
@@ -81,9 +70,6 @@ function _interceptors(options = { post: false }) {
         }
       }
 
-      if (count === 0) {
-        this._updata(false)
-      }
     })
     return Promise.reject(error);
   });

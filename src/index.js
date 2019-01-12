@@ -1,7 +1,5 @@
 let ControlLoad = {}
 const _interceptors = require('./interceptors') 
-const _loadInit = require('./loadInit') 
-const _updata = require('./updata') 
 
 ControlLoad.install = function (Vue, options) {
 
@@ -18,35 +16,7 @@ ControlLoad.install = function (Vue, options) {
     }
   })
 
-  Vue.mixin({
-    methods: {
-      _loadInit,
-      _interceptors,
-      _updata
-    },
-    created() {
-      this._loadInit()
-      if (this === this.$root) {
-        this._interceptors({loads, ...options})
-      }
-    },
-  })
+  _interceptors({loads, ...options})
 }
 
-class state {
-  constructor(Vue){
-    return new Vue({
-      data(){
-        return {
-          state: {
-            loading: false
-          }
-        }
-      }
-    })
-  }
-}
-module.exports = {
-  state,
-  ControlLoad,
-}
+module.exports = ControlLoad

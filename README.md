@@ -1,83 +1,60 @@
 ## 概述
-loading的显示隐藏是一个麻烦事，为了省事很多时候选择了全局loading，请求就显示
+loading的显示隐藏是一个麻烦事，为了省事很多时候选择了全局loading，请求就显示。
 现在你只管绑定局部loading其他的交给我，在有数据的情况下并不会显示loading
 
-请求时自动将loading属性设置为true
-
-在有缓存的情况下loading会为false不会变更
-
-配合vuex这类内存缓存使用,当然常用本地缓存也可以
-
+请求时自动改变局部绑定
 
 ### 使用方式
-暴露在全局的对象是 this.$gLoading 
-
-/v2/movie/search?q=张艺谋
-
-局部绑定 v-partLoad="lo_search"  ( lo_  +  request name )
-
-按钮绑定 v-partLoad="search_btn"
 
 ```
 npm i vue-control-load
 
-import {ControlLoad,state} from 'vue-control-load'
+import ControlLoad from 'vue-control-load'
 
 Vue.use(ControlLoad)
-let gLoading = new state(Vue)
-
-new Vue({
-  gLoading,
-}).$mount('#app')
 ```
 
 
-如果获取数据采用 POST 请按如下方法使用
-
-```
-Vue.use(ControlLoad,{post: true})
-
-axios.post('xxxx',{
-  cache: true
-})
-```
-
-###示例
-
-main.js
-```
-import {ControlLoad, state} from 'vue-control-load'
-Vue.use(ControlLoad)
-let gLoading = new state(Vue)
-
-new Vue({
-  gLoading,
-}).$mount('#app')
-
-```
+### 示例
 
 app.vue
 ```
 <template>
-  <div id="app" @click="gets">
-    {{$gLoading.loading}}
-  </div>
+  <el-button type="primary" 
+    @click="posts"
+    :loading="in_theaters_btn" 
+    v-partLoad="in_theaters_btn">
+    加载中
+  </el-button>
 </template>
 
 <script>
 import axios from 'axios'
 export default {
   methods:{
-    gets(){
-      axios.get('/v2/movie/search?q=张艺谋')
+    posts(){
+      axios.post('/v2/movie/in_theaters',{
+        cache: true
+      })
     }
-  },
-  created(){
-    this.gets()
   }
 }
 </script>
 ```
+
+## 详情
+
+v-partLoad 指令
+
+| 绑定对象     |   绑定类型  | 命名         | 请求示例  |
+| :--------  | --------:   | :---------: |  :------------: |
+| 普通Html   | Boolean      |  lo_search  | /v2/movie/search?q=张艺谋 |
+| 按钮       |   Boolean    |  in_theaters_btn | /v2/movie/in_theaters |
+
+| 请求参数     |   类型   | 请求类型        | 作用  |
+| :--------  | --------:   | :---------: |  :------------: |
+| cache       |   Boolean    |  get / post  | true 之后该请求不在改变绑定属性值， 默认为false, 对按钮无效 |
+
 
 ![loading](https://github.com/XueMary/vue-control-load/blob/master/src/img/loading.gif)
 
@@ -96,3 +73,5 @@ export default {
 1.1.7 添加按钮绑定
 
 1.1.9 稳定版
+
+1.1.10 去除全属性

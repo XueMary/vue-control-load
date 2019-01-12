@@ -8,10 +8,8 @@ function cacheFn(config, callback) {
     return
   }
   
-  let { method, url } = config;
+  let { url } = config;
   let {key, name} = getRequestName(url)
-  
-  method = method.toUpperCase()
 
   const conf = {
     cache,
@@ -23,9 +21,7 @@ function cacheFn(config, callback) {
     return
   }
 
-  if(method === 'GET' || config.openPost){
-    callback(conf)
-  }
+  callback(conf)
 }
 
 module.exports = cacheFn
