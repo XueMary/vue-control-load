@@ -1,9 +1,9 @@
-let gLoading = {}
+let MyLoading = {}
 const _interceptors = require('./interceptors') 
 const _loadInit = require('./loadInit') 
 const _updata = require('./updata') 
 
-gLoading.install = function (Vue, options) {
+MyLoading.install = function (Vue, options) {
 
   let loads = {}
 
@@ -26,8 +26,27 @@ gLoading.install = function (Vue, options) {
     },
     created() {
       this._loadInit()
-      this._interceptors({loads, ...options})
+      if (this === this.$root) {
+        this._interceptors({loads, ...options})
+      }
     },
   })
 }
-module.exports = gLoading
+
+class state {
+  constructor(Vue){
+    return new Vue({
+      data(){
+        return {
+          state: {
+            loading: false
+          }
+        }
+      }
+    })
+  }
+}
+module.exports = MyLoading
+module = {
+  state
+}

@@ -8,10 +8,8 @@ function _interceptors(options = { post: false }) {
   if (insatll) {
     return
   }
-  if (this !== this.$root) {
-    insatll = true
-    return
-  }
+  
+  insatll = true
 
   let count = 0
 
@@ -57,7 +55,6 @@ function _interceptors(options = { post: false }) {
       if (loads[name]) {
         loads[name][name] = false
       }
-      
       if (count === 0) {
         this._updata(false)
       }

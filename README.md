@@ -8,23 +8,24 @@ get请求时自动将loading属性设置为true
 
 在有缓存的情况下loading会为false不会变更
 
-暴露在全局的属性是 this.$gLoading 不可被手动更改
+
+### 使用方式
+暴露在全局的对象是 this.$gLoading 
 
 /v2/movie/search?q=张艺谋
 
 局部绑定 v-partLoad="lo_search"  ( lo_  +  request name )
 
-### 使用方式
-
 ```
 npm i vue-control-load
 
-import 'controlLoad' from 'vue-control-load'
+import controlLoad,{state} from 'vue-control-load'
 
 Vue.use(controlLoad)
+let gLoading = new state(Vue)
 
 new Vue({
-  gLoading: false,
+  gLoading,
 }).$mount('#app')
 ```
 
@@ -43,11 +44,12 @@ axios.post('xxxx',{
 
 main.js
 ```
-import gLoading from 'vue-control-load'
-Vue.use(gLoading)
+import controlLoad,{state} from 'vue-control-load'
+Vue.use(controlLoad)
+let gLoading = new state(Vue)
 
 new Vue({
-  gLoading: false,
+  gLoading,
 }).$mount('#app')
 
 ```
@@ -56,7 +58,7 @@ app.vue
 ```
 <template>
   <div id="app" @click="gets">
-    {{$gLoading}}
+    {{$gLoading.loading}}
   </div>
 </template>
 
@@ -86,3 +88,5 @@ export default {
 1.0.36 请求失败后未修改状态
 
 1.1.1 添加局部绑定，优化监听方式
+
+1.1.2 优化数据更新方式
