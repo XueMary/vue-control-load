@@ -42,18 +42,43 @@ export default {
 </script>
 ```
 
+#### 多参数绑定
+```
+<template>
+  <el-button type="primary" 
+    @click="posts"
+    :loading="in_theaters_btn" 
+    v-partLoad="['in_theaters_btn', 'search_btn']">
+    加载中
+  </el-button>
+</template>
+
+<script>
+export default {
+  data(){
+    return{
+      in_theaters_btn: false, //只需设置绑定在 loading 上的参数就好 该参放在第一位置
+    }
+  }
+}
+</script>
+```
+
 ## 详情
 
 v-partLoad 指令
 
 | 绑定对象     |   绑定类型  | 命名         | 请求示例  |
 | :--------  | --------:   | :---------: |  :------------: |
-| 普通Html   | Boolean      |  lo_search  | /v2/movie/search?q=张艺谋 |
-| 按钮       |   Boolean    |  in_theaters_btn | /v2/movie/in_theaters |
+| 普通Html   |   Boolean/Array      |  lo_search  | /v2/movie/search?q=张艺谋 |
+| 按钮       |   Boolean/Array    |  in_theaters_btn | /v2/movie/in_theaters |
 
 | 请求参数     |   类型   | 请求类型        | 作用  |
 | :--------  | --------:   | :---------: |  :------------: |
 | cache       |   Boolean    |  get / post  | true 之后该请求不在改变绑定属性值， 默认为false, 对按钮无效 |
+
+
+### 效果图
 
 
 ![loading](https://github.com/XueMary/vue-control-load/blob/master/src/img/loading.gif)
@@ -75,3 +100,5 @@ v-partLoad 指令
 1.1.9 稳定版
 
 1.1.10 去除全属性
+
+1.2.1 新增多参数绑定

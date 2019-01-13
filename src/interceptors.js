@@ -19,6 +19,7 @@ function _interceptors(options={}) {
       config.cache = config.data.cache
       delete config.data.cache
     }
+    
 
     upBtn(config.url, true)
 
@@ -26,10 +27,9 @@ function _interceptors(options={}) {
     cacheFn(config, (conf) => {
       let { name } = conf
       name = 'lo_' + name
+      
+      upData(name, true)
 
-      if (loads[name]) {
-        loads[name][name] = true
-      }
     })
 
     return config;
@@ -48,9 +48,7 @@ function _interceptors(options={}) {
       let { name, cache, key } = conf
       name = 'lo_' + name
       
-      if (loads[name]) {
-        loads[name][name] = false
-      }
+      upData(name, false)
 
       if(config.cache){
         cache[key] = true
@@ -65,7 +63,7 @@ function _interceptors(options={}) {
 
       for (let name in loads) {
         const context = loads[name]
-        if (context[name]) {
+        if (typeof context !== 'string' && context[name]) {
           context[name] = false
         }
       }
@@ -74,13 +72,20 @@ function _interceptors(options={}) {
     return Promise.reject(error);
   });
 
+  function upData (name, isBool){
+    if (loads[name]) {
+      if(typeof loads[name] === 'string'){
+        name = loads[name]
+      }
+      loads[name][name] = isBool
+    }
+  }
+
   function upBtn(url, isBool){
     let {name} = getRequestName(url)
-    
     let btn = name + '_btn'
-    if(loads[btn]){
-      loads[btn][btn] = isBool
-    }
+
+    upData(btn, isBool)
   }
 }
 
