@@ -1,6 +1,6 @@
 {
   "name": "vue-control-load",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "control loading change",
   "main": "/src/index.js",
   "dependencies": {
@@ -14,6 +14,10 @@
     "type": "git",
     "url": "git+https://github.com/XueMary/vue-control-load.git"
   },
+  "keywords": [
+    "Vue",
+    "loading"
+  ],
   "author": "xuejihong",
   "license": "ISC",
   "bugs": {
