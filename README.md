@@ -20,26 +20,32 @@ Vue.use(ControlLoad)
 
 ### example
 
-app.vue
+#### 局部参数绑定
+
 ```
 <template>
-  <el-button type="primary" 
-    @click="posts"
-    :loading="in_theaters_btn" 
-    v-partLoad="in_theaters_btn">
-    loading...
-  </el-button>
+  <div type="primary" 
+    :loading="lo_in_theaters" 
+    v-partLoad="lo_in_theaters">
+    loading
+  </div>
 </template>
 
 <script>
 import axios from 'axios'
 export default {
+  data(){
+    return{
+      lo_in_theaters: false
+    }
+  }
   methods:{
     posts(){
-      axios.post('/v2/movie/in_theaters',{
-        cache: true
-      })
+      axios.post('/v2/movie/in_theaters')
     }
+  },
+  mounted(){
+    this.posts()
   }
 }
 </script>
@@ -62,6 +68,51 @@ export default {
     return{
       in_theaters_btn: false, // Multi-parameter simply sets the value of the first parameter
     }
+  },
+  methods:{
+    posts(){
+      axios.post('/v2/movie/in_theaters')
+    },
+    gets(){
+      axios.post('/v2/movie/search?q=张艺谋')
+    }
+  },
+  mounted(){
+    this.gets()
+  }
+}
+</script>
+```
+
+#### cache Parameters using
+
+app.vue
+```
+<template>
+  <div type="primary" 
+    :loading="lo_in_theaters" 
+    v-partLoad="lo_in_theaters">
+    加载中
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+export default {
+  data(){
+    return{
+      lo_in_theaters: false
+    }
+  }
+  methods:{
+    posts(){
+      axios.post('/v2/movie/in_theaters'，{
+        cache: true
+      })
+    }
+  },
+  mounted(){
+    this.posts()
   }
 }
 </script>
