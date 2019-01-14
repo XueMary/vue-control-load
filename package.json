@@ -1,6 +1,6 @@
 {
   "name": "vue-control-load",
-  "version": "1.2.2",
+  "version": "1.2.4",
   "description": "control loading change",
   "main": "/src/index.js",
   "dependencies": {

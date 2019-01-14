@@ -1,7 +1,7 @@
 let ControlLoad = {}
 const _interceptors = require('./interceptors') 
 
-ControlLoad.install = function (Vue, options) {
+ControlLoad.install = function (Vue) {
 
   let loads = {}
 
@@ -31,7 +31,7 @@ ControlLoad.install = function (Vue, options) {
     }
   })
 
-  _interceptors({ loads, ...options })
+  _interceptors({ loads })
 
 }
 
