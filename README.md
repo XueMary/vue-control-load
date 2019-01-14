@@ -1,10 +1,13 @@
-## 概述
-loading的显示隐藏是一个麻烦事，为了省事很多时候选择了全局loading，请求就显示。
-现在你只管绑定局部loading其他的交给我，在有数据的情况下并不会显示loading
+## summarize
+Loading the display and hiding is a trouble, in order to save a lot of time choose the global loading, the request will be displayed.
+Now you just bind the part loading and give the rest to me, and the loading will not be displayed when there is data
 
-请求时自动改变局部绑定
+Changes the locality binding automatically on request
 
-### 使用方式
+
+[中文文档](https://github.com/XueMary/vue-control-load/blob/master/README_zh-CN.md)
+
+### usage mode
 
 ```
 npm i vue-control-load
@@ -15,7 +18,7 @@ Vue.use(ControlLoad)
 ```
 
 
-### 示例
+### example
 
 app.vue
 ```
@@ -24,7 +27,7 @@ app.vue
     @click="posts"
     :loading="in_theaters_btn" 
     v-partLoad="in_theaters_btn">
-    加载中
+    loading...
   </el-button>
 </template>
 
@@ -42,14 +45,14 @@ export default {
 </script>
 ```
 
-#### 多参数绑定
+#### Multiparameter binding
 ```
 <template>
   <el-button type="primary" 
     @click="posts"
     :loading="in_theaters_btn" 
     v-partLoad="['in_theaters_btn', 'search_btn']">
-    加载中
+    loading...
   </el-button>
 </template>
 
@@ -57,50 +60,50 @@ export default {
 export default {
   data(){
     return{
-      in_theaters_btn: false, //只需设置绑定在 loading 上的参数就好 该参放在第一位置
+      in_theaters_btn: false, // Multi-parameter simply sets the value of the first parameter
     }
   }
 }
 </script>
 ```
 
-## 详情
+## particulars
 
-v-partLoad 指令
+v-partLoad 
 
-| 绑定对象     |   绑定类型  | 命名         | 请求示例  |
+| Binding     |   type  | name         | Sample request  |
 | :--------  | --------:   | :---------: |  :------------: |
-| 普通Html   |   Boolean/Array      |  lo_search  | /v2/movie/search?q=张艺谋 |
-| 按钮       |   Boolean/Array    |  in_theaters_btn | /v2/movie/in_theaters |
+| Html teg   |   Boolean/Array      |  lo_search  | /v2/movie/search?q=张艺谋 |
+| button teg       |   Boolean/Array    |  in_theaters_btn | /v2/movie/in_theaters |
 
-| 请求参数     |   类型   | 请求类型        | 作用  |
+| parameter    |   type   | Request type  | effect   |
 | :--------  | --------:   | :---------: |  :------------: |
-| cache       |   Boolean    |  get / post  | true 之后该请求不在改变绑定属性值， 默认为false, 对按钮无效 |
+| cache       |   Boolean    |  get / post  | After true, the request does not change the value of the binding property, which defaults to false and is not valid for the button |
 
 
-### 效果图
+### result
 
 
 ![loading](https://github.com/XueMary/vue-control-load/blob/master/src/img/loading.gif)
 
 
 
-### 版本
+### versions
 
-1.0.35 第一版
+1.0.35 the front page
 
-1.0.36 请求失败后未修改状态
+1.0.36 The status was not modified after the request failed
 
-1.1.1 添加局部绑定，优化监听方式
+1.1.1 Add local binding to optimize listening mode
 
-1.1.2 优化数据更新方式
+1.1.2 Optimize data update methods
 
-1.1.7 添加按钮绑定
+1.1.7 Add button binding
 
-1.1.9 稳定版
+1.1.9 Stable version
 
-1.1.10 去除全属性
+1.1.10 Remove all attributes
 
-1.2.1 新增多参数绑定
+1.2.1 Parameter bindings have been added
 
-1.2.4 修复nuxt框架下插件报错
+1.2.4 Fixed bug reported by plugin under nuxt framework
