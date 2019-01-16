@@ -10,7 +10,8 @@ ControlLoad.install = function (Vue) {
       const value = binding.value
       if (value instanceof Array) {
         loads[value[0]] = vnode.context
-        for (let index = 1; index < value.length; index++) {
+        let len = value.length
+        for (let index = 1; index < len; index++) {
           loads[value[index]] = value[0]
         }
       }

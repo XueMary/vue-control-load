@@ -1,8 +1,5 @@
 ## summarize
-Loading the display and hiding is a trouble, in order to save a lot of time choose the global loading, the request will be displayed.
-Now you just bind the part loading and give the rest to me, and the loading will not be displayed when there is data
-
-Changes the locality binding automatically on request
+Auto loading plugin for vue. 👏 You don't need to write showLoading and hideLoading any more.
 
 
 [中文文档](https://github.com/XueMary/vue-control-load/blob/master/README_zh-CN.md)
@@ -20,7 +17,7 @@ Vue.use(ControlLoad)
 
 ### example
 
-#### 局部参数绑定
+#### Local parameter binding
 
 ```
 <template>

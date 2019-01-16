@@ -1,6 +1,6 @@
 {
   "name": "vue-control-load",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "control loading change",
   "main": "/src/index.js",
   "dependencies": {
@@ -16,7 +16,9 @@
   },
   "keywords": [
     "Vue",
-    "loading"
+    "loading",
+    "vuejs",
+    "axios"
   ],
   "author": "xuejihong",
   "license": "ISC",

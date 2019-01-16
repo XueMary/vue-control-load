@@ -1,8 +1,5 @@
 ## 概述
-loading的显示隐藏是一个麻烦事，为了省事很多时候选择了全局loading，请求就显示。
-现在你只管绑定局部loading其他的交给我，在有数据的情况下并不会显示loading
-
-请求时自动改变局部绑定
+vue的自动加载插件 你不需要编写showLoading hideLoading。
 
 ### 使用方式
 
