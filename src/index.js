@@ -1,7 +1,9 @@
-let ControlLoad = {}
-const _interceptors = require('./interceptors') 
 
-ControlLoad.install = function (Vue) {
+import _interceptors from './interceptors'
+
+function install(Vue) {
+  if (install.installed) return;
+	install.installed = true;
 
   let loads = {}
 
@@ -22,7 +24,8 @@ ControlLoad.install = function (Vue) {
     unbind(el, binding) {
       let value = binding.value
       if (value instanceof Array) {
-        for (let item of value) {
+        for (let index in value) {
+          let item = value[index]
           delete loads[item]
         }
       }
@@ -36,4 +39,9 @@ ControlLoad.install = function (Vue) {
 
 }
 
-module.exports = ControlLoad
+let plugin = {
+  install
+}
+
+// To allow use as module (npm/webpack/etc.) export component
+export default plugin;

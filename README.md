@@ -155,3 +155,5 @@ v-partLoad
 1.2.1 Parameter bindings have been added
 
 1.2.4 Fixed bug reported by plugin under nuxt framework
+
+1.2.8 babel es6

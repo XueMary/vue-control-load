@@ -1,7 +1,7 @@
 
-const axios = require('axios') 
-const cacheFn = require('./cache') 
-const getRequestName  = require('./getRequestName')
+import axios from 'axios'
+import cacheFn from './cache' 
+import getRequestName  from './getRequestName'
 
 function _interceptors(options={}) {
 
@@ -80,4 +80,4 @@ function _interceptors(options={}) {
   }
 }
 
-module.exports = _interceptors
+export default _interceptors

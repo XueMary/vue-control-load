@@ -1,14 +1,28 @@
 {
   "name": "vue-control-load",
-  "version": "1.2.6",
+  "version": "1.2.11",
   "description": "control loading change",
-  "main": "/src/index.js",
+  "main": "dist/vue-control-load.umd.js",
+  "module": "dist/vue-control-load.esm.js",
+  "unpkg": "dist/vue-control-load.min.js",
+  "browser": {
+    "./sfc": "src/index.js"
+  },
   "dependencies": {
     "axios": "^0.18.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "rollup": "^1.1.2",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-vue": "^4.6.1",
+    "vue": "^2.5.16",
+    "vue-template-compiler": "^2.5.16"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
+    "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-control-load.umd.js",
+    "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-control-load.esm.js",
+    "build:unpkg": "rollup --config build/rollup.config.js --format iife --file dist/vue-control-load.min.js"
   },
   "repository": {
     "type": "git",

@@ -9,4 +9,4 @@ function getRequestName(url){
   }
 }
 
-module.exports = getRequestName
+export default getRequestName
