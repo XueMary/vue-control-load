@@ -1,6 +1,8 @@
 ## summarize
 Auto loading plugin for vue. 👏 You don't need to write showLoading and hideLoading any more.
 
+support axios and fetch.  default intercept fetch
+
 
 [中文文档](https://github.com/XueMary/vue-control-load/blob/master/README_zh-CN.md)
 
@@ -11,7 +13,13 @@ npm i vue-control-load
 
 import ControlLoad from 'vue-control-load'
 
-Vue.use(ControlLoad)
+Vue.use(ControlLoad)  // default intercept fetch
+
+or
+
+Vue.use(ControlLoad,{
+  axios
+})
 ```
 
 
@@ -105,7 +113,15 @@ export default {
     posts(){
       axios.post('/v2/movie/in_theaters'，{
         cache: true
-      })
+      }),
+      <!-- axios.get(url,{
+        params: {
+          cache: true
+        }
+      }) ,
+      fetch(url,{
+        cache: true
+      }) -->
     }
   },
   mounted(){
@@ -157,3 +173,5 @@ v-partLoad
 1.2.4 Fixed bug reported by plugin under nuxt framework
 
 1.2.8 babel es6
+
+2.0.0 Add support for fetch

@@ -1,6 +1,8 @@
 ## 概述
 vue的自动加载插件 你不需要编写showLoading hideLoading。
 
+支持 axios 和 fetch
+
 ### 使用方式
 
 ```
@@ -8,7 +10,13 @@ npm i vue-control-load
 
 import ControlLoad from 'vue-control-load'
 
-Vue.use(ControlLoad)
+Vue.use(ControlLoad)  // 默认拦截 fetch
+
+or
+
+Vue.use(ControlLoad,{
+  axios
+})
 ```
 
 
@@ -104,6 +112,14 @@ export default {
       axios.post('/v2/movie/in_theaters'，{
         cache: true
       })
+      <!-- axios.get(url,{
+        params: {
+          cache: true
+        }
+      }) ,
+      fetch(url,{
+        cache: true
+      }) -->
     }
   },
   mounted(){
@@ -155,3 +171,5 @@ v-partLoad 指令
 1.2.4 修复nuxt框架下插件报错
 
 1.2.8 es6转义
+
+2.0.0 新增对fetch的支持

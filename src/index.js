@@ -1,11 +1,12 @@
 
 import _interceptors from './interceptors'
 
-function install(Vue) {
+function install(Vue, options = {}) {
   if (install.installed) return;
 	install.installed = true;
 
   let loads = {}
+  options.loads = loads
 
   Vue.directive('partLoad', {
     bind(el, binding, vnode) {
@@ -35,7 +36,7 @@ function install(Vue) {
     }
   })
 
-  _interceptors({ loads })
+  _interceptors(options)
 
 }
 

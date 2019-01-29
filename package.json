@@ -1,7 +1,7 @@
 {
   "name": "vue-control-load",
-  "version": "1.2.11",
-  "description": "control loading change",
+  "version": "2.0.0",
+  "description": "Auto loading plugin for vue. 👏 You don't need to write showLoading and hideLoading any more.",
   "main": "dist/vue-control-load.umd.js",
   "module": "dist/vue-control-load.esm.js",
   "unpkg": "dist/vue-control-load.min.js",
@@ -9,11 +9,17 @@
     "./sfc": "src/index.js"
   },
   "dependencies": {
-    "axios": "^0.18.0"
+    "fetch-intercept": "^2.3.1"
   },
   "devDependencies": {
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-latest": "^6.24.1",
     "rollup": "^1.1.2",
     "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-json": "^3.1.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-vue": "^4.6.1",
     "vue": "^2.5.16",
     "vue-template-compiler": "^2.5.16"

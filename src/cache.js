@@ -12,10 +12,6 @@ function cacheFn(config, callback) {
     name
   }
 
-  if(cache[key]){
-    return
-  }
-
   callback(conf)
 }
 export default cacheFn
