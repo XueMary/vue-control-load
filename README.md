@@ -59,7 +59,7 @@ export default {
 }
 </script>
 ```
-![loading](https://github.com/XueMary/vue-control-load/blob/master/src/img/loading.gif)
+![loading](https://github.com/XueMary/vue-control-load/blob/master/src/img/loadings.gif)
 
 
 #### Multiparameter binding
