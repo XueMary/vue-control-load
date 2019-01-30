@@ -6,6 +6,9 @@ support axios and fetch.  default intercept fetch.
 Provide fetch intercept life cycle
 
 
+Read the documentation on [GitHub](https://github.com/XueMary/vue-control-load) to see the renderings for each example
+
+
 [中文文档](https://github.com/XueMary/vue-control-load/blob/master/README_zh-CN.md)
 
 ### usage mode
@@ -31,80 +34,12 @@ Vue.use(ControlLoad,{
 
 ```
 <template>
-  <el-button type="primary" 
-    :loading="lo_in_theaters" 
-    v-partLoad="lo_in_theaters">
-    loading
-  </el-button>
-</template>
-
-<script>
-import axios from 'axios'
-export default {
-  data(){
-    return{
-      lo_in_theaters: false
-    }
-  }
-  methods:{
-    posts(){
-      axios.post('/v2/movie/in_theaters')
-    }
-  },
-  mounted(){
-    this.posts()
-  }
-}
-</script>
-```
-
-### result
-
-![loading](https://github.com/XueMary/vue-control-load/blob/master/src/img/loading.gif)
-
-
-#### Multiparameter binding
-```
-<template>
-  <el-button type="primary" 
-    @click="posts"
-    :loading="in_theaters_btn" 
-    v-partLoad="['in_theaters_btn', 'search_btn']">
-    loading...
-  </el-button>
-</template>
-
-<script>
-export default {
-  data(){
-    return{
-      in_theaters_btn: false, // Multi-parameter simply sets the value of the first parameter
-    }
-  },
-  methods:{
-    posts(){
-      axios.post('/v2/movie/in_theaters')
-    },
-    gets(){
-      axios.post('/v2/movie/search?q=张艺谋')
-    }
-  },
-  mounted(){
-    this.gets()
-  }
-}
-</script>
-```
-
-#### cache Parameters using
-
-app.vue
-```
-<template>
-  <div type="primary" 
-    :loading="lo_in_theaters" 
-    v-partLoad="lo_in_theaters">
-    加载中
+  <div class="about"
+    v-loading="lo_search"
+    v-partLoad="lo_search"
+    element-loading-text="拼命加载中"
+    @click="gets">
+    66666
   </div>
 </template>
 
@@ -113,9 +48,66 @@ import axios from 'axios'
 export default {
   data(){
     return{
-      lo_in_theaters: false
+      lo_search: false
     }
   }
+  methods:{
+    gets(){
+      axios.get('/v2/movie/search?q=张艺谋')
+    }
+  }
+}
+</script>
+```
+![loading](https://github.com/XueMary/vue-control-load/blob/master/src/img/loading.gif)
+
+
+#### Multiparameter binding
+```
+<template>
+  <div class="about"
+    v-loading="lo_search"
+    v-partLoad="['lo_search','lo_in_theaters']"
+    element-loading-text="拼命加载中"
+    @click="gets">
+    66666
+  </div>
+  <el-button type="primary" 
+    @click="posts"
+    :loading="in_theaters_btn" 
+    v-partLoad="in_theaters_btn">
+    加载中
+  </el-button>
+</template>
+
+<script>
+export default {
+  data(){
+    return{
+      lo_search: false, // Multi-parameter simply sets the value of the first parameter
+      in_theaters_btn: false
+    }
+  },
+  methods:{
+    posts(){
+      axios.post('/v2/movie/in_theaters')
+    },
+    gets(){
+      axios.get('/v2/movie/search?q=张艺谋')
+    }
+  }
+}
+</script>
+```
+![much-bind](https://github.com/XueMary/vue-control-load/blob/master/src/img/much-bind.gif)
+
+#### cache Parameters using
+
+app.vue
+```
+// cache It doesn't work on buttons
+<script>
+export default {
   methods:{
     posts(){
       axios.post('/v2/movie/in_theaters'，{
@@ -137,6 +129,7 @@ export default {
 }
 </script>
 ```
+![cache](https://github.com/XueMary/vue-control-load/blob/master/src/img/cache.gif)
 
 
 #### newly increased fetch intercept

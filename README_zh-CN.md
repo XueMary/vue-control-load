@@ -28,80 +28,12 @@ Vue.use(ControlLoad,{
 app.vue
 ```
 <template>
-  <el-button type="primary" 
-    :loading="lo_in_theaters" 
-    v-partLoad="lo_in_theaters">
-    加载中
-  </el-button>
-</template>
-
-<script>
-import axios from 'axios'
-export default {
-  data(){
-    return{
-      lo_in_theaters: false
-    }
-  }
-  methods:{
-    posts(){
-      axios.post('/v2/movie/in_theaters')
-    }
-  },
-  mounted(){
-    this.posts()
-  }
-}
-</script>
-```
-
-### 效果图
-
-![loading](https://github.com/XueMary/vue-control-load/blob/master/src/img/loading.gif)
-
-
-#### 多参数绑定
-```
-<template>
-  <el-button type="primary" 
-    @click="posts"
-    :loading="in_theaters_btn" 
-    v-partLoad="['in_theaters_btn', 'search_btn']">
-    加载中
-  </el-button>
-</template>
-
-<script>
-export default {
-  data(){
-    return{
-      in_theaters_btn: false, //多参数只需要设置第一个参数值就可以
-    }
-  },
-  methods:{
-    posts(){
-      axios.post('/v2/movie/in_theaters')
-    },
-    gets(){
-      axios.post('/v2/movie/search?q=张艺谋')
-    }
-  },
-  mounted(){
-    this.gets()
-  }
-}
-</script>
-```
-
-#### cache 参数使用
-
-app.vue
-```
-<template>
-  <div type="primary" 
-    :loading="lo_in_theaters" 
-    v-partLoad="lo_in_theaters">
-    加载中
+  <div class="about"
+    v-loading="lo_search"
+    v-partLoad="lo_search"
+    element-loading-text="拼命加载中"
+    @click="gets">
+    66666
   </div>
 </template>
 
@@ -110,9 +42,66 @@ import axios from 'axios'
 export default {
   data(){
     return{
-      lo_in_theaters: false
+      lo_search: false
     }
   }
+  methods:{
+    gets(){
+      axios.get('/v2/movie/search?q=张艺谋')
+    }
+  }
+}
+</script>
+```
+![loading](https://github.com/XueMary/vue-control-load/blob/master/src/img/loading.gif)
+
+
+#### 多参数绑定
+```
+<template>
+  <div class="about"
+    v-loading="lo_search"
+    v-partLoad="['lo_search','lo_in_theaters']"
+    element-loading-text="拼命加载中"
+    @click="gets">
+    66666
+  </div>
+  <el-button type="primary" 
+    @click="posts"
+    :loading="in_theaters_btn" 
+    v-partLoad="in_theaters_btn">
+    加载中
+  </el-button>
+</template>
+
+<script>
+export default {
+  data(){
+    return{
+      lo_search: false, //多参数只需要设置第一个参数值就可以
+      in_theaters_btn: false
+    }
+  },
+  methods:{
+    posts(){
+      axios.post('/v2/movie/in_theaters')
+    },
+    gets(){
+      axios.get('/v2/movie/search?q=张艺谋')
+    }
+  }
+}
+</script>
+```
+![mach-bind](https://github.com/XueMary/vue-control-load/blob/master/src/img/mach-bind.gif)
+
+#### cache 参数使用
+
+app.vue
+```
+<script>
+// cache 参数对 按钮无效
+export default {
   methods:{
     posts(){
       axios.post('/v2/movie/in_theaters'，{
@@ -127,13 +116,12 @@ export default {
         cache: true
       }) -->
     }
-  },
-  mounted(){
-    this.posts()
   }
 }
 </script>
 ```
+![cache](https://github.com/XueMary/vue-control-load/blob/master/src/img/cache.gif)
+
 
 #### 新增的fetch 生命周期
 
@@ -201,3 +189,5 @@ v-partLoad 指令
 1.2.8 es6转义
 
 2.0.0 新增对fetch的支持
+
+2.1.0 对外提供 fetch 拦截器
