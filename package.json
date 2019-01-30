@@ -1,6 +1,6 @@
 {
   "name": "vue-control-load",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Auto loading plugin for vue. 👏 You don't need to write showLoading and hideLoading any more.",
   "main": "dist/vue-control-load.umd.js",
   "module": "dist/vue-control-load.esm.js",
@@ -9,7 +9,7 @@
     "./sfc": "src/index.js"
   },
   "dependencies": {
-    "fetch-intercept": "^2.3.1"
+    "fetch-intercept2": "^1.0.0"
   },
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",
@@ -25,7 +25,6 @@
     "vue-template-compiler": "^2.5.16"
   },
   "scripts": {
-    "publish": "npm run build & npm publish",
     "build": "npm run build:umd & npm run build:es & npm run build:unpkg",
     "build:umd": "rollup --config build/rollup.config.js --format umd --file dist/vue-control-load.umd.js",
     "build:es": "rollup --config build/rollup.config.js --format es --file dist/vue-control-load.esm.js",

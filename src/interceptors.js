@@ -1,5 +1,4 @@
-
-import fetchIntercept from 'fetch-intercept';
+import fetchIntercept from 'fetch-intercept2';
 import cacheFn from './cache' 
 import getRequestName  from './getRequestName'
 

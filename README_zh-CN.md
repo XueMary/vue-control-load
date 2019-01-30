@@ -93,7 +93,7 @@ export default {
 }
 </script>
 ```
-![mach-bind](https://github.com/XueMary/vue-control-load/blob/master/src/img/mach-bind.gif)
+![much-bind](https://github.com/XueMary/vue-control-load/blob/master/src/img/much-bind.gif)
 
 #### cache 参数使用
 
