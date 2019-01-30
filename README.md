@@ -1,7 +1,9 @@
 ## summarize
 Auto loading plugin for vue. 👏 You don't need to write showLoading and hideLoading any more.
 
-support axios and fetch.  default intercept fetch
+support axios and fetch.  default intercept fetch.  
+
+Provide fetch intercept life cycle
 
 
 [中文文档](https://github.com/XueMary/vue-control-load/blob/master/README_zh-CN.md)
@@ -29,11 +31,11 @@ Vue.use(ControlLoad,{
 
 ```
 <template>
-  <div type="primary" 
+  <el-button type="primary" 
     :loading="lo_in_theaters" 
     v-partLoad="lo_in_theaters">
     loading
-  </div>
+  </el-button>
 </template>
 
 <script>
@@ -55,6 +57,11 @@ export default {
 }
 </script>
 ```
+
+### result
+
+![loading](https://github.com/XueMary/vue-control-load/blob/master/src/img/loading.gif)
+
 
 #### Multiparameter binding
 ```
@@ -131,6 +138,35 @@ export default {
 </script>
 ```
 
+
+#### newly increased fetch intercept
+
+```
+import { fetchIntercept } from 'vue-control-load'
+
+fetchIntercept.register({
+  request: function (url, config) {
+      // Modify the url or config here
+      return [url, config];
+  },
+
+  requestError: function (error) {
+      // Called when an error occured during another 'request' interceptor call
+      return Promise.reject(error);
+  },
+
+  response: function (response) {
+      // Modify the reponse object
+      return response;
+  },
+
+  responseError: function (error) {
+      // Handle an fetch error
+      return Promise.reject(error);
+  }
+});
+```
+
 ## particulars
 
 v-partLoad 
@@ -143,12 +179,6 @@ v-partLoad
 | parameter    |   type   | Request type  | effect   |
 | :--------  | --------:   | :---------: |  :------------: |
 | cache       |   Boolean    |  get / post  | After true, the request does not change the value of the binding property, which defaults to false and is not valid for the button |
-
-
-### result
-
-
-![loading](https://github.com/XueMary/vue-control-load/blob/master/src/img/loading.gif)
 
 
 
@@ -175,3 +205,5 @@ v-partLoad
 1.2.8 babel es6
 
 2.0.0 Add support for fetch
+
+2.1.0 newly increased fetch intercept life cycle

@@ -1,7 +1,7 @@
 ## 概述
 vue的自动加载插件 你不需要编写showLoading hideLoading。
 
-支持 axios 和 fetch
+支持 axios 和 fetch, 并且提供 fetch 拦截器的生命周期
 
 ### 使用方式
 
@@ -20,6 +20,7 @@ Vue.use(ControlLoad,{
 ```
 
 
+
 ### 示例
 
 #### 局部绑定
@@ -27,11 +28,11 @@ Vue.use(ControlLoad,{
 app.vue
 ```
 <template>
-  <div type="primary" 
+  <el-button type="primary" 
     :loading="lo_in_theaters" 
     v-partLoad="lo_in_theaters">
     加载中
-  </div>
+  </el-button>
 </template>
 
 <script>
@@ -53,6 +54,11 @@ export default {
 }
 </script>
 ```
+
+### 效果图
+
+![loading](https://github.com/XueMary/vue-control-load/blob/master/src/img/loading.gif)
+
 
 #### 多参数绑定
 ```
@@ -129,6 +135,34 @@ export default {
 </script>
 ```
 
+#### 新增的fetch 生命周期
+
+```
+import { fetchIntercept } from 'vue-control-load'
+
+fetchIntercept.register({
+  request: function (url, config) {
+      // Modify the url or config here
+      return [url, config];
+  },
+
+  requestError: function (error) {
+      // Called when an error occured during another 'request' interceptor call
+      return Promise.reject(error);
+  },
+
+  response: function (response) {
+      // Modify the reponse object
+      return response;
+  },
+
+  responseError: function (error) {
+      // Handle an fetch error
+      return Promise.reject(error);
+  }
+});
+```
+
 ## 详情
 
 v-partLoad 指令
@@ -141,12 +175,6 @@ v-partLoad 指令
 | 请求参数     |   类型   | 请求类型        | 作用  |
 | :--------  | --------:   | :---------: |  :------------: |
 | cache       |   Boolean    |  get / post  | true 之后该请求不在改变绑定属性值， 默认为false, 对按钮无效 |
-
-
-### 效果图
-
-
-![loading](https://github.com/XueMary/vue-control-load/blob/master/src/img/loading.gif)
 
 
 

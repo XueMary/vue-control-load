@@ -1,5 +1,6 @@
 
 import _interceptors from './interceptors'
+import fetchIntercept from 'fetch-intercept';
 
 function install(Vue, options = {}) {
   if (install.installed) return;
@@ -46,3 +47,4 @@ let plugin = {
 
 // To allow use as module (npm/webpack/etc.) export component
 export default plugin;
+export { fetchIntercept }

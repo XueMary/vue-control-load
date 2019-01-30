@@ -1,6 +1,6 @@
 {
   "name": "vue-control-load",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Auto loading plugin for vue. 👏 You don't need to write showLoading and hideLoading any more.",
   "main": "dist/vue-control-load.umd.js",
   "module": "dist/vue-control-load.esm.js",
@@ -38,7 +38,9 @@
     "Vue",
     "loading",
     "vuejs",
-    "axios"
+    "axios",
+    "fetch",
+    "intercept"
   ],
   "author": "xuejihong",
   "license": "ISC",
